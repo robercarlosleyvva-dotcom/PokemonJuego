@@ -11,6 +11,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
+
+        System.out.println("ESTE ES UN MENSAJE NUEVO");
         
         Label nombre = new Label("Roberto Carlos Leyva Roman");
         Label etiqueta = new Label("Hola mundo");
