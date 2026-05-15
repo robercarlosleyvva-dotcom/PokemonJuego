@@ -12,7 +12,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
 
-        System.out.println(" ABCDEFHHILOIOPOPO");
+        System.out.println("PROBANDO");
         
         Label nombre = new Label("EQUIPO CHILES EN NOGADA");
         Label etiqueta = new Label("Hola mundo");
