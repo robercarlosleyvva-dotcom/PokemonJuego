@@ -14,7 +14,7 @@ public class Main extends Application {
 
         System.out.println("ESTE ES UN MENSAJE NUEVO QUE EDITE DESDE VS");
         
-        Label nombre = new Label("Roberto Carlos Leyva Roman");
+        Label nombre = new Label("EQUIPO CHILES EN NOGADA");
         Label etiqueta = new Label("Hola mundo");
         
         Button boton = new Button("Presioname");
