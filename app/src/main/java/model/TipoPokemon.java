@@ -1,5 +1,13 @@
 package model;
 
-public class TipoPokemon {
     
+    public enum TipoPokemon {
+
+    FUEGO,
+    AGUA,
+    PLANTA,
+    ELECTRICO,
+    ROCA
+
 }
+
