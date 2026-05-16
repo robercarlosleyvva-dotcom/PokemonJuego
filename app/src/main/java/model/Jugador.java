@@ -10,7 +10,6 @@ public abstract class Jugador {
 
     public Jugador (String nombre){
         this.nombre = nombre;
-        
         equipo = new ArrayList<>();
     }
 
@@ -40,6 +39,9 @@ public abstract class Jugador {
         
     }
     return null;}
+
+    //Se declara el metodo abstracto
+    public abstract Movimiento elegirMovimiento(Pokemon pokemonActivo);
 
     //Getter
 
