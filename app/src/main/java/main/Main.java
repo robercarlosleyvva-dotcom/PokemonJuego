@@ -13,19 +13,19 @@ public class Main extends Application {
     public void start(Stage stage) {
 
         System.out.println("PROBANDO");
-        
+
         Label nombre = new Label("EQUIPO CHILES EN NOGADA");
         Label etiqueta = new Label("Hola mundo");
-        
+
         Button boton = new Button("Presioname");
 
-         boton.setOnAction(e ->
+        boton.setOnAction(e ->
                 etiqueta.setText("JavaFX funciona correctamente ")
         );
 
         VBox root = new VBox(10);
 
-        root.getChildren().addAll(nombre,etiqueta,boton);
+        root.getChildren().addAll(nombre, etiqueta, boton);
 
 
         Scene scene = new Scene(root, 400, 200);
@@ -41,7 +41,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        
+
         launch();
     }
 }

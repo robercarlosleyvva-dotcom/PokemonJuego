@@ -1,5 +1,6 @@
 package battle;
 
-public class TipoObjeto {
-    
+public enum TipoObjeto {
+
+    POCION, SUPER_POCION, RELAJANTE, ELIXIR
 }
