@@ -58,6 +58,9 @@ public class Pokemon {
     public int getVida(){
         return vida;
     }
+    public int getVidaMaxima(){
+        return vidaMaxima;
+    }
     public int getAtaque(){
         return ataque;
     }

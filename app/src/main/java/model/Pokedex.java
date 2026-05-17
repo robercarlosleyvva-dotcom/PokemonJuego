@@ -42,7 +42,64 @@ public class Pokedex {
         catalogo.put(19, new Pokemon("Sudowoodo", 5, 25, 25, 14, 15, TipoPokemon.ROCA, null, 0)); // No evoluciona
         catalogo.put(20, new Pokemon("Rockruff", 5, 19, 19, 13, 8, TipoPokemon.ROCA, "Lycanroc", 25));        
     }
-    
+    //Instancia de un pokemon completamente nuevo basado en el molde del catalogo
+    //esto evita que dos jugadores tengan el MISMO pokemon, y el mismo espacio de memoria.
+    public static Pokemon obtenerPokemon(int id){
+           Pokemon molde = catalogo.get(id);
+           //Aca si valida, si se quiere agregar un pokemon con un ID que no esta en el catalogo, retorna un  null
+           if (molde == null){
+            return null;
+           }
+
+           Pokemon copia = new Pokemon(
+            molde.getNombre(),
+            molde.getNivel(),
+            molde.getVida(),
+            molde.getVidaMaxima(),
+            molde.getAtaque(),
+            molde.getDefensa(),
+            molde.getTipo(),
+            
+            
+            //Atributos que controlan la evolucion a futuro
+            molde.getNivel()>= 5? null : null , 0
+           );
+
+
+           //   Le agregamos un par de ataques
+           asignarMovimientosIniciales(copia);
+           return copia;
+            }
+
+
+
+            //Agrega ataques por defecto de forma automatica segun el tipo elemental del pokemon
+
+            private static void asignarMovimientosIniciales(Pokemon p){
+                //Todos los Pokemon conocen el ataque fisico placaje
+                p.aprenderMovimiento( new Movimiento ("Placaje", TipoPokemon.NORMAL, 10));
+
+                //Sgundo ataque basando en su tipo elemental
+                switch (p.getTipo()) {
+                    case PLANTA :
+                        p.aprenderMovimiento(new Movimiento("Latigo Cepa",TipoPokemon.PLANTA,20));        
+                        break;
+                    case FUEGO :
+                        p.aprenderMovimiento(new Movimiento("Ascuas", TipoPokemon.FUEGO, 20));
+                    break;
+                    case AGUA: 
+                        p.aprenderMovimiento(new Movimiento("Pistola de agua",TipoPokemon.AGUA, 20));
+                        break;
+                    case ELECTRICO:
+                        p.aprenderMovimiento(new Movimiento("Impactrueno",TipoPokemon.ELECTRICO,22));
+                        break;
+                    case ROCA: 
+                        p.aprenderMovimiento(new Movimiento("Lanzarocas",TipoPokemon.ROCA, 19));
+                        break;
+                
+                }
+            }
+    }
 
     
-}
+

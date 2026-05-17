@@ -7,7 +7,8 @@ package model;
     AGUA,
     PLANTA,
     ELECTRICO,
-    ROCA
+    ROCA,
+    NORMAL
 
 }
 
