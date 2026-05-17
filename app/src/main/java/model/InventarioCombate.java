@@ -58,5 +58,10 @@ public class InventarioCombate {
         return false;
     }
 
+ //Getter para que la interfaz grafica (JavaFX) pueda listar los objetos en pantalla
+ public Map<String,Integer > getItems(){
+    return items;
+ }
+
     
 }
