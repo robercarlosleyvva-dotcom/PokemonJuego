@@ -26,7 +26,7 @@ javafx {
 }
 
 application {
-    mainClass = 'main.Main'
+    mainClass = 'view.VentanaPrincipal'
 }
 
 tasks.named('test') {
