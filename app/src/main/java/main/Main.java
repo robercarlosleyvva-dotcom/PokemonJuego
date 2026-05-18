@@ -1,47 +1,26 @@
 package main;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+import battle.AccionAtacar;
+import battle.Batalla;
+import model.JugadorHumano;
+import model.Pokemon;
 
-public class Main extends Application {
-
-    @Override
-    public void start(Stage stage) {
-
-        System.out.println("PROBANDO");
-
-        Label nombre = new Label("EQUIPO CHILES EN NOGADA");
-        Label etiqueta = new Label("Hola mundo");
-
-        Button boton = new Button("Presioname");
-
-        boton.setOnAction(e ->
-                etiqueta.setText("JavaFX funciona correctamente ")
-        );
-
-        VBox root = new VBox(10);
-
-        root.getChildren().addAll(nombre, etiqueta, boton);
-
-
-        Scene scene = new Scene(root, 400, 200);
-
-        stage.setTitle("Ventana");
-
-        stage.setScene(scene);
-
-        stage.setScene(scene);
-
-        stage.show();
-
-    }
-
+public class Main {
     public static void main(String[] args) {
+        System.out.println("=== PRUEBA DE BATALLA ===");
 
-        launch();
+        Pokemon p1 = new Pokemon("Pikachu", 5, 100, 100, 55, 40, null, "Raichu", 16);
+        Pokemon p2 = new Pokemon("Charmander", 5, 120, 120, 52, 43, null, "Charmeleon", 16);
+
+        JugadorHumano j1 = new JugadorHumano("Esteban");
+        JugadorHumano j2 = new JugadorHumano("Carlos");
+
+        j1.agregarPokemon(p1);
+        j2.agregarPokemon(p2);
+
+        Batalla batalla = new Batalla(j1, j2);
+
+        System.out.println("\n--- Turno 1: Ambos Atacan ---");
+        batalla.procesarTurno(new AccionAtacar("Impactrueno"), new AccionAtacar("Ascuas"));
     }
 }
