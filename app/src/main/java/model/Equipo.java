@@ -68,6 +68,20 @@ public class Equipo {
         return false;
     }
 
+    //Metodo para limpiar el array equipo
+    public void limpiarEquipo() {
+    listaPokemon.clear();
+}
+    // Remover pokemon
+    public boolean removerPokemon(int indice) {
+
+    if (indice >= 0 && indice < listaPokemon.size()) {
+        listaPokemon.remove(indice);
+        return true;
+    }
+
+    return false;
+}
     // --- GETTERS Y MÉTODOS DE UTILIDAD ---
 
     public ArrayList<Pokemon> getListaPokemon() {

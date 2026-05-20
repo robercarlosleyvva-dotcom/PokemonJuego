@@ -9,8 +9,8 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("=== PRUEBA DE BATALLA ===");
 
-        Pokemon p1 = new Pokemon("Pikachu", 5, 100, 100, 55, 40, null, "Raichu", 16);
-        Pokemon p2 = new Pokemon("Charmander", 5, 120, 120, 52, 43, null, "Charmeleon", 16);
+        Pokemon p1 = new Pokemon("Pikachu", 5, 100, 100, 55, 40, null, null, 16,"/pokemon/pikachu.png");
+        Pokemon p2 = new Pokemon("Charmander", 5, 120, 120, 52, 43, null, "Charmeleon", 16,"/pokemon/charmander.png");
 
         JugadorHumano j1 = new JugadorHumano("Esteban");
         JugadorHumano j2 = new JugadorHumano("Carlos");

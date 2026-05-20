@@ -116,11 +116,39 @@ catalogo.put(48, new Pokemon("Lycanroc", 6, 34, 34, 22, 14, TipoPokemon.ROCA, nu
             molde.getNivel()>= 5? null : null , 0,
             molde.getImagen()
            );
+           
 
 
            //   Le agregamos un par de ataques
            asignarMovimientosIniciales(copia);
            return copia;
+            }
+
+        //Metodo para obtener el ID del pokemon 
+            public static int obtenerIdPorNombre(String nombre){
+
+    for(Map.Entry<Integer, Pokemon> entry : catalogo.entrySet()){
+
+        Pokemon p = entry.getValue();
+
+        if(p.getNombre().equalsIgnoreCase(nombre)){
+
+            return entry.getKey();
+        }
+    }
+
+    return -1;
+}
+            public static Pokemon buscarPorNombre(String nombre){
+
+            for(Pokemon p : catalogo.values()){
+
+             if(p.getNombre().equalsIgnoreCase(nombre)){
+            return p;
+             }
+            }
+
+           return null;
             }
 
 

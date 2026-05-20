@@ -1,12 +1,12 @@
 package view;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.geometry.Pos;
-import javafx.geometry.Insets;
 
 public class VentanaPrincipal extends Application {
     @Override
@@ -20,7 +20,7 @@ public class VentanaPrincipal extends Application {
         Button btnSalir = new Button("Salir");
 
 
-        btnEquipo.setOnAction(e -> new VentanaEquipo().mostrar());
+        btnEquipo.setOnAction(e -> new VentanaEquipo(null).mostrar());
         btnPVE.setOnAction(e -> new VentanaGameplay().mostrar());
         btnPVP.setOnAction(e -> new VentanaPVP().mostrar());
         btnPokedex.setOnAction(e -> new VentanaPokedex().mostrar());

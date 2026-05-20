@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Pokemon {
 
     // ATRIBUTOS
+    
     private String nombre;
     private int nivel;
     private int vida;
@@ -20,7 +21,8 @@ public class Pokemon {
     private String imagen;                      //Guarda una imagen del pokemon
 
     // CONSTRUCTOR
-    public Pokemon(String nombre,
+    public Pokemon(
+                   String nombre,
                    int nivel,
                    int vida,
                    int vidaMaxima,
@@ -30,7 +32,7 @@ public class Pokemon {
                    String nombreEvolucion,
                    int nivelEvolucion,
                    String imagen) {
-
+        
         this.nombre = nombre;
         this.nivel = nivel;
         this.vida = vida;
@@ -46,6 +48,8 @@ public class Pokemon {
     }
 
     // GETTERS
+
+   
     public String getNombre() {
         return nombre;
     }
@@ -82,6 +86,8 @@ public class Pokemon {
 }
 
     // MÉTODOS DE GESTIÓN
+
+    
 
     public void aprenderMovimiento(Movimiento movimiento) {
         if (movimientos.size() < 4) {
