@@ -11,7 +11,7 @@ public class VentanaEquipo {
         Stage stage = new Stage();
         stage.setTitle("Mi Equipo");
 
-        Label lblTitulo = new Label("Pokémon de tu equipo:");
+        Label lblTitulo = new Label("Pokemon de tu equipo:");
 
         VBox layout = new VBox(10, lblTitulo);
         Scene scene = new Scene(layout, 400, 300);

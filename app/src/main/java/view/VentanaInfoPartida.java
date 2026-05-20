@@ -9,7 +9,7 @@ public class VentanaInfoPartida {
 
     public void mostrar() {
         Stage stage = new Stage();
-        stage.setTitle("Información de la Partida");
+        stage.setTitle("Informacion de la Partida");
 
         Label lblInfo = new Label("Datos de la partida actual...");
 

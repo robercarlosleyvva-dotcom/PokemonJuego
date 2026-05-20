@@ -11,7 +11,7 @@ public class VentanaPokedex {
         Stage stage = new Stage();
         stage.setTitle("Pokedex");
 
-        Label lblTitulo = new Label("Pokémones disponibles");
+        Label lblTitulo = new Label("Pokemones disponibles");
 
         VBox layout = new VBox(10, lblTitulo);
         Scene scene = new Scene(layout, 400, 300);

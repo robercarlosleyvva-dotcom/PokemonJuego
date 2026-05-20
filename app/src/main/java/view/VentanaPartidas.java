@@ -11,7 +11,7 @@ public class VentanaPartidas {
         Stage stage = new Stage();
         stage.setTitle("Partidas Guardadas");
 
-        Label lblTitulo = new Label("Aquí se mostrarán las partidas guardadas");
+        Label lblTitulo = new Label("Aqui se mostraran las partidas guardadas");
 
         VBox layout = new VBox(10, lblTitulo);
         Scene scene = new Scene(layout, 400, 300);

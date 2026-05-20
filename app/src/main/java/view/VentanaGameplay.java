@@ -12,7 +12,7 @@ public class VentanaGameplay {
         Stage stage = new Stage();
         stage.setTitle("Gameplay-Batalla");
 
-        Label lblInfo = new Label("Aquí se mostrará la batalla");
+        Label lblInfo = new Label("Aqui se mostrara la batalla");
         Button btnAtacar = new Button("Atacar");
         Button btnDefender = new Button("Defender");
 

@@ -9,7 +9,7 @@ public class VentanaPvPTeam {
 
     public void mostrar() {
         Stage stage = new Stage();
-        stage.setTitle("Selección de Equipo PvP");
+        stage.setTitle("Seleccion de Equipo PvP");
 
         Label lblTitulo = new Label("Selecciona tu equipo para PvP");
 
