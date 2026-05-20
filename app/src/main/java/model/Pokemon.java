@@ -17,6 +17,7 @@ public class Pokemon {
     private int experiencia;                  // Progreso para subir de nivel
     private String nombreEvolucion;            // Destino de la evolución
     private int nivelEvolucion;                // Nivel requerido para evolucionar
+    private String imagen;                      //Guarda una imagen del pokemon
 
     // CONSTRUCTOR
     public Pokemon(String nombre,
@@ -27,7 +28,8 @@ public class Pokemon {
                    int defensa,
                    TipoPokemon tipo,
                    String nombreEvolucion,
-                   int nivelEvolucion) {
+                   int nivelEvolucion,
+                   String imagen) {
 
         this.nombre = nombre;
         this.nivel = nivel;
@@ -40,6 +42,7 @@ public class Pokemon {
         this.experiencia = 0;
         this.nombreEvolucion = nombreEvolucion;
         this.nivelEvolucion = nivelEvolucion;
+        this.imagen = imagen;
     }
 
     // GETTERS
@@ -74,6 +77,9 @@ public class Pokemon {
     public ArrayList<Movimiento> getMovimientos() {
         return movimientos;
     }
+    public String getImagen() {
+    return imagen;
+}
 
     // MÉTODOS DE GESTIÓN
 
