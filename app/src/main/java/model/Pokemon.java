@@ -110,7 +110,7 @@ public class Pokemon {
 
     private void verificarEvolucion() {
         if (nombreEvolucion != null && this.nivel >= nivelEvolucion) {
-            System.out.println("¡Espera! " + this.nombre + " está evolucionando...");
+            System.out.println("¡Espera! " + this.nombre + " esta evolucionando...");
             this.nombre = nombreEvolucion;
             this.nombreEvolucion = null; // Ya evolucionó, eliminamos el destino futuro
             System.out.println("¡Felicidades! Tu Pokémon ha evolucionado en " + this.nombre + ".");
