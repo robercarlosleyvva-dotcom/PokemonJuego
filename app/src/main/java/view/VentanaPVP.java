@@ -168,7 +168,7 @@ public class VentanaPVP {
             gestorPartida.guardarProgreso(j2, "partidaJ2.dat");
 
             String textoOriginal = lblInfo.getText();
-            lblInfo.setText("💾 ¡Progreso de batalla guardado con éxito!");
+            lblInfo.setText("💾 Progreso de batalla guardado con exito!");
 
             new Timeline(new KeyFrame(Duration.seconds(1.2), ev -> {
                 lblInfo.setText(textoOriginal);
@@ -283,11 +283,11 @@ public class VentanaPVP {
 
     private void evaluarEstatusPostCombate() {
         if (pokemonJ1 != null && pokemonJ1.estaDebilitado()) {
-            lblInfo.setText( pokemonJ1.getNombre() + " de " + j1.getNombre() + " cayó!");
+            lblInfo.setText( pokemonJ1.getNombre() + " de " + j1.getNombre() + " cayo!");
             AnimadorPokemon.animarDebilitado(imgPokemonJ1);
             procesarRelevoJugador1();
         } else if (pokemonJ2 != null && pokemonJ2.estaDebilitado()) {
-            lblInfo.setText( pokemonJ2.getNombre() + " de " + j2.getNombre() + " cayó!");
+            lblInfo.setText( pokemonJ2.getNombre() + " de " + j2.getNombre() + " cayo!");
             AnimadorPokemon.animarDebilitado(imgPokemonJ2);
             procesarRelevoJugador2();
         } else {
@@ -320,7 +320,7 @@ public class VentanaPVP {
                 btnGuardar.setDisable(false);
                 configurarTurnoVisual();
             } else {
-                lblInfo.setText(j1.getNombre() + " no tiene más Pokémon! Ganador: " + j2.getNombre());
+                lblInfo.setText(j1.getNombre() + " no tiene mas Pokémon! Ganador: " + j2.getNombre());
             }
         })).play();
     }
@@ -347,7 +347,7 @@ public class VentanaPVP {
                 btnGuardar.setDisable(false);
                 configurarTurnoVisual();
             } else {
-                lblInfo.setText( j2.getNombre() + " no tiene más Pokémon! el ganador es " + j1.getNombre());
+                lblInfo.setText( j2.getNombre() + " no tiene mas Pokémon el ganador es " + j1.getNombre());
             }
         })).play();
     }

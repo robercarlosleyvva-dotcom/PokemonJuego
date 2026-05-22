@@ -60,13 +60,14 @@ public class Partida {
      //Avanza el progreso del jugador y premia a su equipo con experiencia.
 
      public void registrarVictoriaPvE(){
+        int expCalculada = 50;
         System.out.println("¡Victoria registrada para " + jugadorPrincipal.getNombre() +"!");
 
         //Repartir experiencia a los pokemon
         for(Pokemon p : jugadorPrincipal.getEquipo()){
             if(!p.estaDebilitado()){
-                p.ganarExperiencia(100*batallaActualPvE);
-            }
+    battle.SistemaDeExp.ganarExperiencia(p, expCalculada);
+          }
         }
 
         //Avanzar en la historia de las 3 batallas

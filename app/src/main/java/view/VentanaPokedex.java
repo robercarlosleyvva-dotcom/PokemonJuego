@@ -86,15 +86,27 @@ public class VentanaPokedex {
             }
         });
 
-        listaPokemon.getItems().addAll(
+       listaPokemon.getItems().addAll(
+            // === GENERACIÓN 1 ===
             "Bulbasaur", "Ivysaur", "Venusaur", "Charmander", "Charmeleon", "Charizard",
-            "Squirtle", "Wartortle", "Blastoise", "Pikachu", "Leafeon", "Flareon",
-            "Vaporeon", "Cyndaquil", "Quilava", "Typhlosion", "Totodile", "Croconaw",
-            "Feraligatr", "Larvitar", "Pupitar", "Tyranitar", "Treecko", "Grovyle",
-            "Sceptile", "Torchic", "Combusken", "Blaziken", "Shinx", "Luxio",
-            "Luxray", "Piplup", "Prinplup", "Empoleon", "Snivy", "Servine",
-            "Serperior", "Oshawott", "Dewott", "Samurott", "Rowlet", "Dartrix",
-            "Decidueye", "Litten", "Torracat", "Incineroar", "Rockruff", "Lycanroc"
+            "Squirtle", "Wartortle", "Blastoise", "Pikachu", "Vaporeon", "Flareon",
+            
+            // === GENERACIÓN 2 ===
+            "Cyndaquil", "Quilava", "Typhlosion", "Totodile", "Croconaw", "Feraligatr",
+            "Larvitar", "Pupitar", "Tyranitar",
+            
+            // === GENERACIÓN 3 ===
+            "Treecko", "Grovyle", "Sceptile", "Torchic", "Combusken", "Blaziken",
+            
+            // === GENERACIÓN 4 ===
+            "Piplup", "Prinplup", "Empoleon", "Shinx", "Luxio", "Luxray", "Leafeon",
+            
+            // === GENERACIÓN 5 ===
+            "Snivy", "Servine", "Serperior", "Oshawott", "Dewott", "Samurott",
+            
+            // === GENERACIÓN 7 ===
+            "Rowlet", "Dartrix", "Decidueye", "Litten", "Torracat", "Incineroar", 
+            "Rockruff", "Lycanroc"
         );
 
         // 5. COMPONENTES DEL POKEMON (Imagen y textos)

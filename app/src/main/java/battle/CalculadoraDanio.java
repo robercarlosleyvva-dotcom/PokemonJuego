@@ -32,12 +32,12 @@ public class CalculadoraDanio {
         // Ajustado a getNombreMov()
         String mensaje = atacante.getNombre() + " usó " + movimiento.getNombre() + ".";
         if (multiplicadorTipos > 1.0) {
-            mensaje += " ¡Es súper eficaz!";
+            mensaje += " Es súper eficaz!";
         } else if (multiplicadorTipos < 1.0 && multiplicadorTipos > 0) {
             mensaje += " No es muy eficaz...";
         }
         if (esCritico) {
-            mensaje += " ¡Un golpe crítico!";
+            mensaje += " Un golpe crítico!";
         }
 
         return new ResultadoAccion(mensaje, danioRedondeado, esCritico, multiplicadorTipos);

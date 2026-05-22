@@ -100,7 +100,8 @@ public class Pokedex {
             molde.getAtaque(),
             molde.getDefensa(),
             molde.getTipo(),
-            null, 0, // Atributos de evolucion limpios
+            molde.getNombreEvolucion(), // <--- Usa el nombre del molde
+         molde.getNivelEvolucion(), // Atributos de evolucion limpios
             molde.getImagen()
         );
 

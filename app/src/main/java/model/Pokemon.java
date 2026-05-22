@@ -115,6 +115,10 @@ public class Pokemon  implements Serializable{
 
     // === MODIFICADO: Ahora busca en la Pokedex para mutar la imagen y los stats base ===
     private void verificarEvolucion() {
+        System.out.println("DEBUG EVOLUCION: Squirtle está revisando...");
+    System.out.println("  -> Nivel Actual: " + this.nivel);
+    System.out.println("  -> Nivel Requerido para evolucionar: " + this.nivelEvolucion);
+    System.out.println("  -> ¿Nombre de evolución definido?: " + this.nombreEvolucion);
         if (nombreEvolucion != null && this.nivel >= nivelEvolucion) {
             System.out.println("¡Espera! " + this.nombre + " esta evolucionando...");
             
@@ -180,5 +184,13 @@ public class Pokemon  implements Serializable{
 
     public void takeDamage(double danio) {
         recibirDanio((int) Math.round(danio));
+    }
+    // --- ESTOS MÉTODOS SON LOS QUE TE FALTAN ---
+    public int getExperiencia() {
+        return this.experiencia;
+    }
+
+    public void setExperiencia(int experiencia) {
+        this.experiencia = experiencia;
     }
 }
