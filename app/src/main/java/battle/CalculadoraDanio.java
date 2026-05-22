@@ -1,8 +1,9 @@
 package battle;
 
-import model.Pokemon;
-import model.Movimiento;
 import java.util.Random;
+
+import model.Movimiento;
+import model.Pokemon;
 
 public class CalculadoraDanio {
 
@@ -29,7 +30,7 @@ public class CalculadoraDanio {
         int danioRedondeado = (int) Math.round(danioFinal);
 
         // Ajustado a getNombreMov()
-        String mensaje = atacante.getNombre() + " usó " + movimiento.getNombreMov() + ".";
+        String mensaje = atacante.getNombre() + " usó " + movimiento.getNombre() + ".";
         if (multiplicadorTipos > 1.0) {
             mensaje += " ¡Es súper eficaz!";
         } else if (multiplicadorTipos < 1.0 && multiplicadorTipos > 0) {

@@ -1,16 +1,33 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Equipo {
+
+
+
+public class Equipo implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+    
     private ArrayList<Pokemon> listaPokemon;
     private static final int LIMITE_MAXIMO = 6;
+    private boolean bloqueado = false;
 
     // Constructor: Inicializa un equipo vacío
     public Equipo() {
         this.listaPokemon = new ArrayList<>();
     }
 
+    public boolean isBloqueado(){
+        return bloqueado;
+    }
+    
+    public void setBloqueado(boolean  bloqueado){
+        this.bloqueado = bloqueado;
+    }
+
+    
     /**
      * Agrega un Pokémon al equipo respetando el límite máximo de 6 (Requisito del juego).
      * @return true si se agregó con éxito, false si el equipo ya estaba lleno.

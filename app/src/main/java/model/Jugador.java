@@ -1,7 +1,11 @@
 package model;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class Jugador {
+public abstract class Jugador implements Serializable{
+
+    private static final long serialVersionUID = 1L;
+    
     //Atributos encapsulados
     private String nombre;
     private ArrayList<Pokemon>  equipo;

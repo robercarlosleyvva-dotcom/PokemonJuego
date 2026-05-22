@@ -1,6 +1,7 @@
 package battle;
 
 import model.Jugador;
+import model.Pokemon;
 
 public class AccionCombate {
     private int prioridad;
@@ -22,5 +23,10 @@ public class AccionCombate {
 
     public void setPrioridad(int prioridad) {
         this.prioridad = prioridad;
+    }
+
+    public void ejecutar(Pokemon atacante, Pokemon defensor) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'ejecutar'");
     }
 }

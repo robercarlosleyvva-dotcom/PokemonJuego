@@ -7,18 +7,18 @@ import javafx.util.Duration;
 
 public class AnimadorPokemon {
 
-    // 1. EL BRINCO DE ATAQUE (CORREGIDO PARA QUE NO SE ESCAPE)
+    // 1. EL BRINCO DE ATAQUE
     public static void animarAtaque(ImageView pokemon, boolean haciaLaDerecha) {
-    TranslateTransition brinco = new TranslateTransition(Duration.millis(120), pokemon);
-    int distancia = haciaLaDerecha ? 60 : -60; 
-    
-    brinco.setFromX(0);          // Fuerza a que empiece SIEMPRE en su posición original
-    brinco.setToX(distancia);    // Va hacia el enemigo
-    brinco.setAutoReverse(true); // Activa el regreso automático
-    brinco.setCycleCount(2);     // Va (1) y regresa (2)
-    
-    brinco.play();
-}
+        TranslateTransition brinco = new TranslateTransition(Duration.millis(120), pokemon);
+        int distancia = haciaLaDerecha ? 60 : -60; 
+        
+        brinco.setFromX(0);          
+        brinco.setToX(distancia);    
+        brinco.setAutoReverse(true); 
+        brinco.setCycleCount(2);     
+        
+        brinco.play();
+    }
 
     // 2. EL PARPADEO POR DAÑO
     public static void animarRecibirDanio(ImageView pokemon) {
@@ -39,15 +39,30 @@ public class AnimadorPokemon {
 
         sacudida.setOnFinished(event -> {
             TranslateTransition caida = new TranslateTransition(Duration.millis(400), pokemon);
-            caida.setByY(150); 
+            caida.setByY(150); // Lo desplaza hacia abajo temporalmente
             
             FadeTransition desvanecer = new FadeTransition(Duration.millis(400), pokemon);
-            desvanecer.setToValue(0.0); 
+            desvanecer.setToValue(0.0); // Se vuelve invisible
             
             caida.play();
             desvanecer.play();
         });
 
         sacudida.play();
+    }
+
+    // === CORREGIDO: Cancela hilos fantasmas de animación y fuerza el regreso al origen ===
+    public static void restaurarPosicionYVisibilidad(ImageView pokemon) {
+        if (pokemon != null) {
+            // 1. Le ponemos freno de mano de golpe a cualquier animación colgada en este ImageView
+            pokemon.translateYProperty().unbind();
+            pokemon.translateXProperty().unbind();
+            pokemon.opacityProperty().unbind();
+            
+            // 2. Ahora sí, seteamos los valores absolutos originales limpios
+            pokemon.setTranslateX(0); 
+            pokemon.setTranslateY(0); 
+            pokemon.setOpacity(1.0);  
+        }
     }
 }

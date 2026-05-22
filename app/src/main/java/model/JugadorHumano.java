@@ -1,6 +1,11 @@
 package model;
 
-public class JugadorHumano extends Jugador{
+import java.io.Serializable;
+
+public class JugadorHumano extends Jugador implements Serializable{
+
+    private static final long serialVersionUID = 1L;
+
 
     //Almacena el movimiento que el usuario elija en la interfaz grafica
     private Movimiento movimientoSeleccionado;

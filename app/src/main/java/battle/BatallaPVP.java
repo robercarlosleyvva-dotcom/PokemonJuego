@@ -1,7 +1,6 @@
 package battle;
 
 import model.Jugador;
-import model.Pokemon;
 
 public class BatallaPVP extends Batalla {
 

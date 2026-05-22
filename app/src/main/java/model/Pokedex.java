@@ -118,11 +118,11 @@ public class Pokedex {
         return -1;
     }           
 
-    public static Pokemon buscarPorNombre(String nombre) {
-        for (Pokemon p : catalogo.values()) {
-            if (p.getNombre().equalsIgnoreCase(nombre)) {
-                return p;
-            }
+  public static Pokemon buscarPorNombre(String nombre) {
+        // En lugar de devolver el molde, buscamos su ID y devolvemos una COPIA fresca con ataques
+        int id = obtenerIdPorNombre(nombre);
+        if (id != -1) {
+            return obtenerPokemon(id); 
         }
         return null;
     }
@@ -130,13 +130,13 @@ public class Pokedex {
     private static void asignarMovimientosIniciales(Pokemon p) {
         switch (p.getTipo()) {
             case PLANTA :
-                p.aprenderMovimiento(new Movimiento("Latigo Cepa", TipoPokemon.PLANTA, 20));        
+                p.aprenderMovimiento(new Movimiento("Latigazo", TipoPokemon.PLANTA, 20));        
                 break;
             case FUEGO :
                 p.aprenderMovimiento(new Movimiento("Ascuas", TipoPokemon.FUEGO, 20));
                 break;
             case AGUA: 
-                p.aprenderMovimiento(new Movimiento("Pistola de agua", TipoPokemon.AGUA, 20));
+                p.aprenderMovimiento(new Movimiento("Acuajet", TipoPokemon.AGUA, 20));
                 break;
             case ELECTRICO:
                 p.aprenderMovimiento(new Movimiento("Impactrueno", TipoPokemon.ELECTRICO, 22));

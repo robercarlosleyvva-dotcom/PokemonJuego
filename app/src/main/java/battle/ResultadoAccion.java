@@ -1,7 +1,5 @@
 package battle;
 
-import model.Pokemon;
-
 public class ResultadoAccion {
     private final String mensaje;
     private final double danioInfligido;

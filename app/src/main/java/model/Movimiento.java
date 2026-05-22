@@ -1,6 +1,10 @@
 package model;
 
-public class Movimiento {
+import java.io.Serializable;
+
+public class Movimiento implements Serializable{
+    private static final long serialVersionUID = 1L;
+    
     private String nombreMov;
     private TipoPokemon tipoMov;
     private int potencia;
@@ -14,7 +18,7 @@ public class Movimiento {
 
     //getters y setters
 
-    public String getNombreMov(){
+    public String getNombre(){
         return nombreMov;
     }
     public TipoPokemon getTipoMov(){
