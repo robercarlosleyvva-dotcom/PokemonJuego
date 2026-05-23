@@ -89,17 +89,17 @@ public class VentanaPokedex {
        listaPokemon.getItems().addAll(
             // === GENERACIÓN 1 ===
             "Bulbasaur", "Ivysaur", "Venusaur", "Charmander", "Charmeleon", "Charizard",
-            "Squirtle", "Wartortle", "Blastoise", "Pikachu", "Vaporeon", "Flareon",
+            "Squirtle", "Wartortle", "Blastoise", "Pikachu", "Flareon","Vaporeon",
             
             // === GENERACIÓN 2 ===
-            "Cyndaquil", "Quilava", "Typhlosion", "Totodile", "Croconaw", "Feraligatr",
+            "Cyndaquil", "Quilava", "Typhlosion", "Totodile", "Croconaw", "Feraligatr","Leafeon",
             "Larvitar", "Pupitar", "Tyranitar",
             
             // === GENERACIÓN 3 ===
             "Treecko", "Grovyle", "Sceptile", "Torchic", "Combusken", "Blaziken",
             
             // === GENERACIÓN 4 ===
-            "Piplup", "Prinplup", "Empoleon", "Shinx", "Luxio", "Luxray", "Leafeon",
+            "Piplup", "Prinplup", "Empoleon", "Shinx", "Luxio", "Luxray",
             
             // === GENERACIÓN 5 ===
             "Snivy", "Servine", "Serperior", "Oshawott", "Dewott", "Samurott",
