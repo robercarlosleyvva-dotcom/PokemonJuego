@@ -141,8 +141,11 @@ public class Pokemon  implements Serializable{
                 // Preparamos los datos por si este nuevo Pokémon tiene otra evolución más adelante
                 this.nombreEvolucion = evolucionMolde.getNombreEvolucion();
                 this.nivelEvolucion = evolucionMolde.getNivelEvolucion();
-                
+                // Dentro de verificarEvolucion
+
+            System.out.println("DEBUG: Vida actualizada a " + this.vida + "/" + this.vidaMaxima);
                 System.out.println("¡Felicidades! Tu " + nombreAnterior + " ha evolucionado en " + this.nombre + ".");
+
             }
         }
     }

@@ -18,6 +18,7 @@ import model.InventarioCombate;
 import model.Pokemon;
 
 public class VentanaGameplay {
+    
 
     private Equipo equipo; 
     private Pokemon miPokemonActual; 
@@ -33,6 +34,8 @@ public class VentanaGameplay {
     private InventarioCombate mochila = new InventarioCombate(); 
 
     // Variables de vida porcentual para las barras visuales (0.0 a 1.0)
+    private ProgressBar barraVidaJ1;
+
     private double vidaJ1 = 1.0;
     private double vidaCPU = 1.0;
 
@@ -128,7 +131,7 @@ public class VentanaGameplay {
         lblTuVida.setLayoutX(50);
         lblTuVida.setLayoutY(330);
 
-        ProgressBar barraVidaJ1 = new ProgressBar(vidaJ1);
+        barraVidaJ1 = new ProgressBar(vidaJ1); // <-- Debe quedar así
         barraVidaJ1.setPrefWidth(180);
         barraVidaJ1.setStyle("-fx-accent: #2ecc71;");
         barraVidaJ1.setLayoutX(50);
@@ -302,11 +305,18 @@ public class VentanaGameplay {
             System.out.print(reporteExp); 
             
             if (!miPokemonActual.getNombre().equalsIgnoreCase(nombreViejo)) {
+
                 lblInfo.setText("¡Tu " + nombreViejo + " evoluciono en " + miPokemonActual.getNombre() + "!");
                 try {
                     imgPokemonJ1.setImage(new Image(getClass().getResourceAsStream(miPokemonActual.getImagen())));
                     lblTVida.setText("Vida de " + miPokemonActual.getNombre() + ":");
-                } catch (Exception ex) {}
+                    this.vidaJ1 = 1.0; // Como está curado, es 100% de vida
+                    barraVidaJ1.setProgress(this.vidaJ1);
+                    barraVidaJ1.setStyle("-fx-accent: #2ecc71;");
+                
+                    
+                }
+                 catch (Exception ex) {}
             }
         }
 
@@ -346,7 +356,8 @@ public class VentanaGameplay {
             AnimadorPokemon.animarRecibirDanio(imgPokemonJ1);
 
             if (miPokemonActual != null && !miPokemonActual.estaDebilitado()) {
-                int danioReal = miPokemonActual.getVidaMaxima() / 2;
+                //EL DAÑO  QUE CAUSARA EL CPU SERA 1/3 DE LA VIDA DEL POKEMON
+                int danioReal = miPokemonActual.getVidaMaxima() / 3;
                 miPokemonActual.recibirDanio(danioReal);
                 
                 this.vidaJ1 = (double) miPokemonActual.getVida() / miPokemonActual.getVidaMaxima();
