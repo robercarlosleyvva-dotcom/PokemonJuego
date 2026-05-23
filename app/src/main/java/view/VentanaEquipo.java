@@ -184,6 +184,8 @@ public class VentanaEquipo {
                 Button btnMenu = new Button("Volver al Menu");
                 btnMenu.setStyle(estiloBtnOverlay + "-fx-background-color: #7f8c8d;");
 
+                Button btnCreditos = new Button("Creditos");
+
                 // 4. Acciones de los nuevos botones
                 btnPvE.setOnAction(ev -> {
                     stage.close();

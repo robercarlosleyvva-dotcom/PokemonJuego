@@ -58,6 +58,8 @@ public class VentanaPrincipal extends Application {
         Button btnPokedex = new Button("Pokedex");
         Button btnBorrarProgreso = new Button("Borrar Progreso");
         Button btnSalir = new Button("Salir");
+        Button btnCreditos = new Button("Creditos");
+        
 
         // Estilos estéticos de los botones
         String estiloBoton = "-fx-font-weight: bold; -fx-font-size: 14px; -fx-background-color: rgba(255, 255, 255, 0.85); -fx-text-fill: #2c3e50; -fx-background-radius: 15; -fx-cursor: hand;";
@@ -65,6 +67,7 @@ public class VentanaPrincipal extends Application {
         btnPVE.setStyle(estiloBoton);
         btnPVP.setStyle(estiloBoton);
         btnPokedex.setStyle(estiloBoton);
+        btnCreditos.setStyle(estiloBoton);
         
         btnBorrarProgreso.setStyle("-fx-font-weight: bold; -fx-font-size: 14px; -fx-background-color: #e67e22; -fx-text-fill: white; -fx-background-radius: 15; -fx-cursor: hand;");
         btnSalir.setStyle("-fx-font-weight: bold; -fx-font-size: 14px; -fx-background-color: #e74c3c; -fx-text-fill: white; -fx-background-radius: 15; -fx-cursor: hand;");
@@ -76,6 +79,7 @@ public class VentanaPrincipal extends Application {
         btnPokedex.setPrefWidth(180);
         btnBorrarProgreso.setPrefWidth(180); 
         btnSalir.setPrefWidth(180);
+        btnCreditos.setPrefWidth(180);
 
         // Acciones de los botones
         btnEquipo.setOnAction(e -> {
@@ -148,6 +152,8 @@ public class VentanaPrincipal extends Application {
 
         btnSalir.setOnAction(e -> stage.close());
 
+       btnCreditos.setOnAction(e -> new VentanaCreditos().mostrar());
+
         // 4. ACOMODO EN CAPAS
         VBox contenido = new VBox();
         contenido.setAlignment(Pos.CENTER);
@@ -161,7 +167,8 @@ public class VentanaPrincipal extends Application {
             btnPVP,
             btnPokedex,
             btnBorrarProgreso, 
-            btnSalir
+            btnSalir,
+            btnCreditos
         );
 
         StackPane root = new StackPane();
