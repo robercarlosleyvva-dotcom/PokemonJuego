@@ -238,31 +238,36 @@ public class VentanaPVP {
             lblInfo.setText("Resolviendo combate!");
             
             logicaPVP.procesarRonda(movimientoSeleccionadoJ1, movimientoSeleccionadoJ2);
-            ejecutarFaseResolucionGrafica();
+            ResolucionGrafica();
         }
     }
 
     // === AQUÍ SE CORRIGIÓ EL BUG: Se rellenó el método para actualizar las barras ===
     // === MÉTODO MODIFICADO PARA ANIMACIÓN PVP ===
-    private void ejecutarFaseResolucionGrafica() {
-        // 1. Animaciones para J1 (Ataca a la derecha)
+    // === MÉTODO CORREGIDO: Ahora con delay para ataques secuenciales ===
+    private void ResolucionGrafica() {
+        // 1. Preparamos las rutas para J1 y J2
         String rutaNormalJ1 = pokemonJ1.getImagen();
         String rutaAtaqueJ1 = rutaNormalJ1.substring(0, rutaNormalJ1.lastIndexOf(".")) + "2.png";
         
-        AnimadorPokemon.animarAtaque(imgPokemonJ1, true);
-        AnimadorPokemon.animarCambioImagen(imgPokemonJ1, rutaNormalJ1, rutaAtaqueJ1);
-        AnimadorPokemon.animarRecibirDanio(imgPokemonJ2); // J1 golpea a J2
-
-        // 2. Animaciones para J2 (Ataca a la izquierda)
         String rutaNormalJ2 = pokemonJ2.getImagen();
         String rutaAtaqueJ2 = rutaNormalJ2.substring(0, rutaNormalJ2.lastIndexOf(".")) + "2.png";
-        
-        AnimadorPokemon.animarAtaque(imgPokemonJ2, false);
-        AnimadorPokemon.animarCambioImagen(imgPokemonJ2, rutaNormalJ2, rutaAtaqueJ2);
-        AnimadorPokemon.animarRecibirDanio(imgPokemonJ1); // J2 golpea a J1
 
-        new Timeline(new KeyFrame(Duration.seconds(1.5), event -> {
-            // ... (el resto de tu lógica de cálculo de vida que ya tenías)
+        // 2. ATAQUE J1: Ocurre inmediatamente
+        AnimadorPokemon.animarAtaque(imgPokemonJ1, true);
+        AnimadorPokemon.animarCambioImagen(imgPokemonJ1, rutaNormalJ1, rutaAtaqueJ1);
+        AnimadorPokemon.animarRecibirDanio(imgPokemonJ2);
+
+        // 3. ATAQUE J2: Ocurre con un retraso de 800ms para que no se encimen
+        new Timeline(new KeyFrame(Duration.millis(800), e -> {
+            AnimadorPokemon.animarAtaque(imgPokemonJ2, false);
+            AnimadorPokemon.animarCambioImagen(imgPokemonJ2, rutaNormalJ2, rutaAtaqueJ2);
+            AnimadorPokemon.animarRecibirDanio(imgPokemonJ1);
+        })).play();
+
+        // 4. RESOLUCIÓN FINAL: Ocurre a los 1.8s (cuando ambas animaciones han terminado)
+        new Timeline(new KeyFrame(Duration.seconds(1.8), event -> {
+            
             if (j1 != null && !j1.getEquipo().isEmpty()) {
                 this.pokemonJ1 = j1.getEquipo().get(indiceJ1);
             }

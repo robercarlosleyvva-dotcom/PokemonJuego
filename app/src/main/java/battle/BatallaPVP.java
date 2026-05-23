@@ -18,7 +18,7 @@ public class BatallaPVP extends Batalla {
     // Procesa una ronda completa de combate
     public void procesarRonda(String movJugador1, String movJugador2) {
         numeroRonda++;
-
+        
         // Creamos los objetos de acción usando tus clases
         AccionCombate accionJ1 = new AccionAtacar(movJugador1);
         AccionCombate accionJ2 = new AccionAtacar(movJugador2);
