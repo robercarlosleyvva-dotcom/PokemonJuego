@@ -1,6 +1,8 @@
 package view;
 
 import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
@@ -64,5 +66,33 @@ public class AnimadorPokemon {
             pokemon.setTranslateY(0); 
             pokemon.setOpacity(1.0);  
         }
+    }
+
+    // 4. CAMBIO DE IMAGEN TEMPORAL (SPRITE SWAP)
+    public static void animarCambioImagen(ImageView pokemon, String pathNormal, String pathAtaque) {
+        // 1. Imprimir en consola qué archivo busca (para saber si la ruta está bien)
+        System.out.println("DEBUG: Buscando archivo en: " + pathAtaque);
+
+        // --- ¡AQUÍ ESTÁ EL CAMBIO IMPORTANTE! Usamos AnimadorPokemon.class ---
+        var resourceStream = AnimadorPokemon.class.getResourceAsStream(pathAtaque);
+        
+        if (resourceStream == null) {
+            // Si entra aquí, es que NO encontró la imagen.
+            System.out.println("DEBUG: ¡ERROR! No se pudo encontrar el archivo: " + pathAtaque);
+            return; 
+        }
+
+        // 3. Si llega aquí, es que sí encontró la imagen
+        javafx.scene.image.Image imgAtk = new javafx.scene.image.Image(resourceStream);
+        
+        // --- AQUÍ TAMBIÉN CAMBIAMOS A AnimadorPokemon.class ---
+        javafx.scene.image.Image imgIdle = new javafx.scene.image.Image(AnimadorPokemon.class.getResourceAsStream(pathNormal));
+
+        pokemon.setImage(imgAtk);
+
+        Timeline timer = new Timeline(new KeyFrame(Duration.millis(300), e -> {
+            pokemon.setImage(imgIdle);
+        }));
+        timer.play();
     }
 }

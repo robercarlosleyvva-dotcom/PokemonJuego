@@ -243,15 +243,26 @@ public class VentanaPVP {
     }
 
     // === AQUÍ SE CORRIGIÓ EL BUG: Se rellenó el método para actualizar las barras ===
+    // === MÉTODO MODIFICADO PARA ANIMACIÓN PVP ===
     private void ejecutarFaseResolucionGrafica() {
+        // 1. Animaciones para J1 (Ataca a la derecha)
+        String rutaNormalJ1 = pokemonJ1.getImagen();
+        String rutaAtaqueJ1 = rutaNormalJ1.substring(0, rutaNormalJ1.lastIndexOf(".")) + "2.png";
+        
         AnimadorPokemon.animarAtaque(imgPokemonJ1, true);
+        AnimadorPokemon.animarCambioImagen(imgPokemonJ1, rutaNormalJ1, rutaAtaqueJ1);
+        AnimadorPokemon.animarRecibirDanio(imgPokemonJ2); // J1 golpea a J2
+
+        // 2. Animaciones para J2 (Ataca a la izquierda)
+        String rutaNormalJ2 = pokemonJ2.getImagen();
+        String rutaAtaqueJ2 = rutaNormalJ2.substring(0, rutaNormalJ2.lastIndexOf(".")) + "2.png";
+        
         AnimadorPokemon.animarAtaque(imgPokemonJ2, false);
-        AnimadorPokemon.animarRecibirDanio(imgPokemonJ1);
-        AnimadorPokemon.animarRecibirDanio(imgPokemonJ2);
+        AnimadorPokemon.animarCambioImagen(imgPokemonJ2, rutaNormalJ2, rutaAtaqueJ2);
+        AnimadorPokemon.animarRecibirDanio(imgPokemonJ1); // J2 golpea a J1
 
         new Timeline(new KeyFrame(Duration.seconds(1.5), event -> {
-            
-            // 1. Sincronizamos a los Pokémon con el daño real que les hizo la lógica
+            // ... (el resto de tu lógica de cálculo de vida que ya tenías)
             if (j1 != null && !j1.getEquipo().isEmpty()) {
                 this.pokemonJ1 = j1.getEquipo().get(indiceJ1);
             }
@@ -259,24 +270,20 @@ public class VentanaPVP {
                 this.pokemonJ2 = j2.getEquipo().get(indiceJ2);
             }
 
-            // 2. Calculamos la nueva vida matemática y se la asignamos a la barra visual
             if (pokemonJ1 != null && pokemonJ2 != null) {
                 vidaJ1 = (double) pokemonJ1.getVida() / pokemonJ1.getVidaMaxima();
                 vidaJ2 = (double) pokemonJ2.getVida() / pokemonJ2.getVidaMaxima();
             }
 
-            // 3. Evitamos que la barra colapse con números negativos
             if (vidaJ1 < 0) vidaJ1 = 0;
             if (vidaJ2 < 0) vidaJ2 = 0;
 
             barraVidaJ1.setProgress(vidaJ1);
             barraVidaJ2.setProgress(vidaJ2);
 
-            // 4. Cambiamos las barras a color rojo si la vida baja del 30%
             if (vidaJ1 <= 0.3) barraVidaJ1.setStyle("-fx-accent: #e74c3c;");
             if (vidaJ2 <= 0.3) barraVidaJ2.setStyle("-fx-accent: #e74c3c;");
 
-            // 5. Validamos si alguien murió y cambiamos el turno
             evaluarEstatusPostCombate();
         })).play();
     }

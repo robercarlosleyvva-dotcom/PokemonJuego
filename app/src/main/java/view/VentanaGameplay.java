@@ -211,36 +211,38 @@ public class VentanaGameplay {
 
         // Turnos de Batalla
         btnAtacar.setOnAction(event -> {
-            desactivarControles(btnAtacar, btnMochila, btnRegresar);
-            
-            String nombreMio = (miPokemonActual != null) ? miPokemonActual.getNombre() : "Pokemon";
-            lblInfo.setText("" + nombreMio + " usa un ataque fulminante!");
+    desactivarControles(btnAtacar, btnMochila, btnRegresar);
+    
+    // 1. Preparamos las rutas de forma segura
+    String rutaNormal = miPokemonActual.getImagen();
+    // Usamos substring para asegurar que solo cambiamos la extensión, evita el error de "png2.png"
+    String rutaAtaque = rutaNormal.substring(0, rutaNormal.lastIndexOf(".")) + "2.png";
 
-            AnimadorPokemon.animarAtaque(imgPokemonJ1, true);
-            AnimadorPokemon.animarRecibirDanio(imgPokemonCPU);
+    // 2. Ejecutamos las animaciones UNA sola vez
+    AnimadorPokemon.animarAtaque(imgPokemonJ1, true); 
+    AnimadorPokemon.animarCambioImagen(imgPokemonJ1, rutaNormal, rutaAtaque);
+    AnimadorPokemon.animarRecibirDanio(imgPokemonCPU);
+    
+    // 3. Actualizamos la información visual
+    String nombreMio = (miPokemonActual != null) ? miPokemonActual.getNombre() : "Pokemon";
+    lblInfo.setText(nombreMio + " usa un ataque fulminante!");
 
-            if (vidaCPU > 0) {
-                vidaCPU -= 0.2;
-                if (vidaCPU < 0) vidaCPU = 0;
-                barraVidaCPU.setProgress(vidaCPU);
-                if (vidaCPU <= 0.3) barraVidaCPU.setStyle("-fx-accent: #e74c3c;");
-            }
+    // 4. Lógica de daño
+    if (vidaCPU > 0) {
+        vidaCPU -= 0.2;
+        if (vidaCPU < 0) vidaCPU = 0;
+        barraVidaCPU.setProgress(vidaCPU);
+        if (vidaCPU <= 0.3) barraVidaCPU.setStyle("-fx-accent: #e74c3c;");
+    }
 
-            KeyFrame resetearImagen = new KeyFrame(Duration.millis(300), e -> {
-                try {
-                    if (miPokemonActual != null && vidaJ1 > 0) {
-                        imgPokemonJ1.setImage(new Image(getClass().getResourceAsStream(miPokemonActual.getImagen())));
-                    }
-                } catch (Exception ex) {}
-            });
-            new Timeline(resetearImagen).play();
-
-            if (vidaCPU <= 0) {
-                procesarVictoriaRival(lblInfo, lblVidaRival, barraVidaCPU, lblTuVida, btnAtacar, btnMochila, btnRegresar);
-            } else {
-                ejecutarContraataqueRival(lblInfo, lblTuVida, barraVidaJ1, btnAtacar, btnMochila, btnRegresar);
-            }
-        });
+    // 5. Decisión de qué sigue (Victoria o Contraataque)
+    // Eliminamos el KeyFrame manual de reset aquí porque AnimadorPokemon.cambiarImagen ya lo hace por ti
+    if (vidaCPU <= 0) {
+        procesarVictoriaRival(lblInfo, lblVidaRival, barraVidaCPU, lblTuVida, btnAtacar, btnMochila, btnRegresar);
+    } else {
+        ejecutarContraataqueRival(lblInfo, lblTuVida, barraVidaJ1, btnAtacar, btnMochila, btnRegresar);
+    }
+});
 
         btnUsaPocion.setOnAction(e -> {
             procesarCuracion("Pocion", btnUsaPocion, btnUsaSuperPocion, btnAtrasMochila, lblInfo, barraVidaJ1, lblTuVida, btnAtacar, btnMochila, btnRegresar);
@@ -350,64 +352,72 @@ public class VentanaGameplay {
     }
 
     private void ejecutarContraataqueRival(Label lblInfo, Label lblTuVida, ProgressBar barraJ1, Button act, Button moch, Button huir) {
+        
         KeyFrame ataqueEnemigo = new KeyFrame(Duration.seconds(1.2), e -> {
-            lblInfo.setText(pokemonCPU.getNombre() + " enemigo usa un ataque critico!");
-            AnimadorPokemon.animarAtaque(imgPokemonCPU, false);
-            AnimadorPokemon.animarRecibirDanio(imgPokemonJ1);
+    lblInfo.setText(pokemonCPU.getNombre() + " enemigo usa un ataque critico!");
+    
+    // --- NUEVO: Animación de cambio de sprite del rival ---
+    String rutaNormalCPU = pokemonCPU.getImagen();
+    String rutaAtaqueCPU = rutaNormalCPU.substring(0, rutaNormalCPU.lastIndexOf(".")) + "2.png";
+    AnimadorPokemon.animarCambioImagen(imgPokemonCPU, rutaNormalCPU, rutaAtaqueCPU);
+    
+    // Animaciones de acción
+    AnimadorPokemon.animarAtaque(imgPokemonCPU, false);
+    AnimadorPokemon.animarRecibirDanio(imgPokemonJ1);
 
-            if (miPokemonActual != null && !miPokemonActual.estaDebilitado()) {
-                //EL DAÑO  QUE CAUSARA EL CPU SERA 1/3 DE LA VIDA DEL POKEMON
-                int danioReal = miPokemonActual.getVidaMaxima() / 3;
-                miPokemonActual.recibirDanio(danioReal);
+    if (miPokemonActual != null && !miPokemonActual.estaDebilitado()) {
+        // EL DAÑO QUE CAUSARA EL CPU SERA 1/3 DE LA VIDA DEL POKEMON
+        int danioReal = miPokemonActual.getVidaMaxima() / 3;
+        miPokemonActual.recibirDanio(danioReal);
+        
+        this.vidaJ1 = (double) miPokemonActual.getVida() / miPokemonActual.getVidaMaxima();
+        barraJ1.setProgress(this.vidaJ1);
+        
+        if (this.vidaJ1 <= 0.3) {
+            barraJ1.setStyle("-fx-accent: #e74c3c;"); 
+        }
+    }
+
+    KeyFrame reactivarTurno = new KeyFrame(Duration.millis(500), ev -> {
+        
+        if (miPokemonActual == null || miPokemonActual.estaDebilitado()) {
+            AnimadorPokemon.animarDebilitado(imgPokemonJ1);
+            String nombreDebilitado = (miPokemonActual != null) ? miPokemonActual.getNombre() : "Pokemon";
+            
+            if (equipo != null && indiceActual + 1 < equipo.getListaPokemon().size()) {
+                indiceActual++; 
+                miPokemonActual = equipo.getListaPokemon().get(indiceActual);
+                
+                root.getChildren().remove(imgPokemonJ1);
+                imgPokemonJ1 = new ImageView();
+                imgPokemonJ1.setFitWidth(150);
+                imgPokemonJ1.setFitHeight(150);
+                imgPokemonJ1.setPreserveRatio(false); 
+                imgPokemonJ1.setLayoutX(60);  
+                imgPokemonJ1.setLayoutY(410);
+                root.getChildren().add(imgPokemonJ1);
                 
                 this.vidaJ1 = (double) miPokemonActual.getVida() / miPokemonActual.getVidaMaxima();
                 barraJ1.setProgress(this.vidaJ1);
+                barraJ1.setStyle("-fx-accent: #2ecc71;");
                 
-                if (this.vidaJ1 <= 0.3) {
-                    barraJ1.setStyle("-fx-accent: #e74c3c;"); 
-                }
+                lblTuVida.setText("Vida de " + miPokemonActual.getNombre() + ":");
+                try {
+                    imgPokemonJ1.setImage(new Image(getClass().getResourceAsStream(miPokemonActual.getImagen())));
+                } catch (Exception ex) {}
+                lblInfo.setText("¡" + nombreDebilitado + " cayo! ¡Entra " + miPokemonActual.getNombre() + "!");
+                activarControles(act, moch, huir);
+            } else {
+                lblInfo.setText("Todo tu equipo se ha debilitado. Fin de la partida.");
             }
-
-            KeyFrame reactivarTurno = new KeyFrame(Duration.millis(500), ev -> {
-                if (miPokemonActual == null || miPokemonActual.estaDebilitado()) {
-                    AnimadorPokemon.animarDebilitado(imgPokemonJ1);
-                    String nombreDebilitado = (miPokemonActual != null) ? miPokemonActual.getNombre() : "Pokemon";
-                    
-                    if (equipo != null && indiceActual + 1 < equipo.getListaPokemon().size()) {
-                        indiceActual++; 
-                        miPokemonActual = equipo.getListaPokemon().get(indiceActual);
-                        
-                        // === SOLUCIÓN DETONACIÓN JUGADOR: Destruimos el contenedor hundido y creamos uno virgen ===
-                        root.getChildren().remove(imgPokemonJ1);
-                        imgPokemonJ1 = new ImageView();
-                        imgPokemonJ1.setFitWidth(150);
-                        imgPokemonJ1.setFitHeight(150);
-                        imgPokemonJ1.setPreserveRatio(false); 
-                        imgPokemonJ1.setLayoutX(60);  
-                        imgPokemonJ1.setLayoutY(410);
-                        root.getChildren().add(imgPokemonJ1); // Se reinserta con coordenadas de fábrica intactas
-                        
-                        this.vidaJ1 = (double) miPokemonActual.getVida() / miPokemonActual.getVidaMaxima();
-                        barraJ1.setProgress(this.vidaJ1);
-                        barraJ1.setStyle("-fx-accent: #2ecc71;");
-                        
-                        lblTuVida.setText("Vida de " + miPokemonActual.getNombre() + ":");
-                        try {
-                            imgPokemonJ1.setImage(new Image(getClass().getResourceAsStream(miPokemonActual.getImagen())));
-                        } catch (Exception ex) {}
-                        lblInfo.setText("¡" + nombreDebilitado + " cayo! ¡Entra " + miPokemonActual.getNombre() + "!");
-                        activarControles(act, moch, huir);
-                    } else {
-                        lblInfo.setText("Todo tu equipo se ha debilitado. Fin de la partida.");
-                    }
-                } else {
-                    lblInfo.setText("Que deberia hacer " + miPokemonActual.getNombre() + "?");
-                    activarControles(act, moch, huir);
-                }
-            });
-            new Timeline(reactivarTurno).play();
-        });
-        new Timeline(ataqueEnemigo).play();
+        } else {
+            lblInfo.setText("Que deberia hacer " + miPokemonActual.getNombre() + "?");
+            activarControles(act, moch, huir);
+        }
+    });
+    new Timeline(reactivarTurno).play();
+});
+new Timeline(ataqueEnemigo).play();
     }
 
     private void desactivarControles(Button a, Button b, Button c) {
